@@ -8,7 +8,7 @@ backward = new Events();
 // These are based on topic path - the finer grained pattern will be used.
 // Examples below
 
-forward.on("json/telegraf/Sweden/Uppsala/Evolar/EvCoolingSystem/Logging/#", function(payload) {
+forward.on("json/nologging/Sweden/Uppsala/Evolar/EvCoolingSystem/ToScada/#", function(payload) {
     return {
             //dataType: "Int32",
             //value: parseInt(payload)
@@ -17,7 +17,7 @@ forward.on("json/telegraf/Sweden/Uppsala/Evolar/EvCoolingSystem/Logging/#", func
          };
 });
 
-backward.on("json/telegraf/Sweden/Uppsala/Evolar/EvCoolingSystem/Logging/#", function(variant) {
+backward.on("json/nologging/Sweden/Uppsala/Evolar/EvCoolingSystem/ToScada/#", function(variant) {
             return {
                 topic:variant.topic,
                 payload:variant.value
@@ -36,7 +36,7 @@ options = {
     roundtrip:false,	// set to true to limit updates to onMessage (i.e. validate an accuator is set)
     forward:forward,	// data converter - mqtt -> opcua
     backward:backward,	// data converter - opcua -> mqtt
-    topics:['json/telegraf/Sweden/Uppsala/Evolar/EvCoolingSystem/Logging/#'] // Customize to override. These are the default so uncessary.
+    topics:['json/nologging/Sweden/Uppsala/Evolar/EvCoolingSystem/ToScada/#'] // Customize to override. These are the default so uncessary.
 };
 
 var server = new mqtt2opc(options);
